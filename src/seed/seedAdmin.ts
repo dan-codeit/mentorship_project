@@ -1,7 +1,6 @@
-import Admin from "../models/admin.js";
+import Admin from "../models/admin.model.js";
 import dotenv from "dotenv";
 import { isUserEmailUnique } from "../validations/isUserEmailUnique.js";
-
 
 dotenv.config();
 
@@ -11,7 +10,7 @@ export default async function seedAdmin() {
     const email = process.env.ADMIN_EMAIL;
     const password = process.env.ADMIN_PASSWORD;
 
-    //const first:string|undefined = "Boy"
+  
 
     if (!firstName) {
       throw new Error("Name cannot be empty");
@@ -38,7 +37,7 @@ export default async function seedAdmin() {
     if (!isEmailUnique) {
       console.log("Email is already in use.");
       return;
-      }
+    }
 
     await Admin.create({
       email,

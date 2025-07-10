@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
-import { Mentor, Mentee } from "../models/u-index.js";
+import { Mentor, Mentee } from "../models/z-index.js";
 import { generateResetToken } from "../secure/generateEmailToken.js";
 import { sendPasswordResetEmail } from "../services/emailForPassword.js";
 
@@ -29,7 +29,6 @@ export const forgotPasswordRequest: RequestHandler = async (
       }
     }
 
-
     if (user && userType) {
       const { resetToken, resetTokenHash, resetTokenExpires } =
         generateResetToken();
@@ -51,7 +50,6 @@ export const forgotPasswordRequest: RequestHandler = async (
         resetToken,
       });
     }
-
 
     res.json({
       success: true,

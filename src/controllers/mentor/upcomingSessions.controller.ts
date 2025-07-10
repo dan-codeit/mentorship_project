@@ -1,4 +1,4 @@
-import { SessionBooking } from "../../models/u-index.js";
+import { SessionBooking } from "../../models/z-index.js";
 import { RequestHandler } from "express";
 import { Op } from "sequelize";
 

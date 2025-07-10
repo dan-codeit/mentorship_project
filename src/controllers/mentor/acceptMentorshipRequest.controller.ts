@@ -1,4 +1,4 @@
-import { SessionBooking, MentorshipRequest } from "../../models/u-index.js";
+import { SessionBooking, MentorshipRequest } from "../../models/z-index.js";
 import { RequestHandler } from "express";
 
 export const acceptMentorshipRequest: RequestHandler = async (req, res) => {
@@ -13,27 +13,25 @@ export const acceptMentorshipRequest: RequestHandler = async (req, res) => {
     const mentorId = req.user?.id;
 
     if (!mentorId || !menteeId) {
-       res
+      res
         .status(400)
         .json({ error: "Both mentorId and menteeId are required." });
-        return;
+      return;
     }
 
- 
-
     if (!["accept", "cancel"].includes(update)) {
-       res
+      res
         .status(400)
         .json({ error: "Update action must be either 'accept' or 'cancel'." });
-        return;
+      return;
     }
 
     const request = await MentorshipRequest.findByPk(requestId);
     console.log("Request ID:", requestId);
     console.log("Mentorship request:", request);
     if (!request) {
-       res.status(404).json({ error: "Mentorship request not found." });
-       return;
+      res.status(404).json({ error: "Mentorship request not found." });
+      return;
     }
 
     if (request.menteeId !== Number(menteeId)) {
@@ -42,38 +40,38 @@ export const acceptMentorshipRequest: RequestHandler = async (req, res) => {
     }
 
     if (request.mentorId !== Number(mentorId)) {
-       res
+      res
         .status(403)
         .json({ error: "You are not authorized to update this request." });
-        return;
+      return;
     }
 
     if (request.status === "accepted" && update === "accept") {
-       res
+      res
         .status(400)
         .json({ error: "This mentorship request has already been accepted." });
-        return;
+      return;
     }
 
     if (update === "cancel") {
       request.status = "rejected";
       await request.save();
-       res
+      res
         .status(200)
         .json({ message: "Mentorship request has been cancelled." });
-        return;
+      return;
     }
 
     if (update === "accept") {
       request.status = "accepted";
       await request.save();
-       res
+      res
         .status(200)
         .json({ message: "Mentorship request has been accepted." });
-        return;
+      return;
     }
   } catch (error) {
     console.error("Error accepting mentorship request:", error);
-     res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ error: "Internal server error" });
   }
 };

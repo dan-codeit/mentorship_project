@@ -5,8 +5,8 @@ import {
   CreationOptional,
   DataTypes,
 } from "sequelize";
-import {sequelize} from "../config/database_setup.js"
-import { hashPassword } from "../hash/hashPassword.js";
+import { sequelize } from "../config/database_setup.js";
+import { hashPassword } from "../hashPass/hashPassword.js";
 
 class Mentor extends Model<
   InferAttributes<Mentor>,

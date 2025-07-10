@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
-import { SessionBooking, TimeSlot } from "../../models/u-index.js";
+import { SessionBooking, TimeSlot } from "../../models/z-index.js";
 
 export const viewAmentorsessions: RequestHandler = async (req, res) => {
   try {
@@ -10,7 +10,7 @@ export const viewAmentorsessions: RequestHandler = async (req, res) => {
         {
           model: TimeSlot,
           as: "timeSlot",
-          where: { mentorId }
+          where: { mentorId },
         },
       ],
     });

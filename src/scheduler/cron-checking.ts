@@ -1,5 +1,5 @@
-// cron-checking.ts
-import { SessionBooking, TimeSlot } from "../models/u-index.js";
+
+import { SessionBooking, TimeSlot } from "../models/z-index.js";
 import { Op } from "sequelize";
 
 export async function checkAndCompleteSessions() {

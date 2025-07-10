@@ -1,11 +1,10 @@
 import { RequestHandler } from "express";
-import { SessionBooking } from "../../models/u-index.js";
+import { SessionBooking } from "../../models/z-index.js";
 
 export const viewAmenteeSessions: RequestHandler = async (req, res) => {
   try {
     const { menteeId } = req.params;
 
-   
     const sessions = await SessionBooking.findAll({ where: { menteeId } });
 
     res.json({

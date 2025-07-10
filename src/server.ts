@@ -2,17 +2,17 @@ import { sequelize } from "./config/database_setup.js";
 import { app } from "./app.js";
 import dotenv from "dotenv";
 import seedAdmin from "./seed/seedAdmin.js";
-import { seedMentees} from "./seed/seedMentees.js";
+import { seedMentees } from "./seed/seedMentees.js";
 import { seedMentors } from "./seed/seedMentor.js";
-import "./models/u-index.js";
+import "./models/z-index.js";
 
 dotenv.config();
 
-const startServer = async () => {
+const onServer = async () => {
   try {
     await sequelize.authenticate();
     console.log("Database is connected");
-    //await sequelize.drop({ cascade: true });
+   
     await sequelize.sync({ alter: true });
     console.log("Database is synched");
 
@@ -20,11 +20,11 @@ const startServer = async () => {
     console.log("Admin is seeded");
 
     await seedMentees();
-    console.log("Mentees are created")
+    console.log("Mentees are created");
 
     await seedMentors();
-    console.log("Mentors are created")
-    
+    console.log("Mentors are created");
+
     app.listen(process.env.PORT, () => {
       console.log(`Server is running at ${process.env.PORT}`);
     });
@@ -33,4 +33,4 @@ const startServer = async () => {
   }
 };
 
-startServer();
+onServer();

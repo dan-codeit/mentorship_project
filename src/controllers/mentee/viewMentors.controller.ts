@@ -1,11 +1,13 @@
-import { Mentor } from "../../models/u-index.js";
+import { Mentor } from "../../models/z-index.js";
 import { Request, Response } from "express";
 
-export async function viewAllMentors(req: Request, res: Response): Promise<void> {
+export async function viewAllMentors(
+  req: Request,
+  res: Response
+): Promise<void> {
   try {
-    
     const mentorsList = await Mentor.findAll({
-      attributes: ["id", "firstName", "email", "isAvailable"],
+      attributes: ["id", "firstName", "isAvailable"],
     });
     res.status(200).json({
       success: true,

@@ -1,7 +1,10 @@
 import { RequestHandler } from "express";
-import { Mentor, Mentee } from "../models/u-index.js";
+import { Mentor, Mentee } from "../models/z-index.js";
 
-export const changePassword: RequestHandler = async (req, res): Promise<void> => {
+export const changePassword: RequestHandler = async (
+  req,
+  res
+): Promise<void> => {
   try {
     if (!req.user) {
       res.status(401).json({ message: "Unauthorized" });
@@ -12,14 +15,14 @@ export const changePassword: RequestHandler = async (req, res): Promise<void> =>
     const { newPassword, confirmPassword } = req.body;
 
     if (!(newPassword || confirmPassword)) {
-        res.json(400).json({ message: "All fields are required" });
-        return
+      res.json(400).json({ message: "All fields are required" });
+      return;
     }
 
-      if (confirmPassword !== newPassword) {
-        res.json(400).json({ message: "Password does not match" });
-        return
-      }
+    if (confirmPassword !== newPassword) {
+      res.json(400).json({ message: "Password does not match" });
+      return;
+    }
 
     if (!role || !id) {
       res.status(403).json({ message: "Role not authorized to edit profile" });
@@ -37,7 +40,7 @@ export const changePassword: RequestHandler = async (req, res): Promise<void> =>
     }
     res.json({ success: true, message: "Password updated" });
   } catch (error) {
-    console.error("Error in updating user password", error)
+    console.error("Error in updating user password", error);
     res.status(500).json({ success: false, message: "Internal server error" });
   }
 };

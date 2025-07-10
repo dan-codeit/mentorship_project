@@ -1,4 +1,4 @@
-import { Mentor, Mentee } from "../../models/u-index.js";
+import { Mentor, Mentee } from "../../models/z-index.js";
 import { RequestHandler } from "express";
 
 export const changeRole: RequestHandler = async (req, res) => {

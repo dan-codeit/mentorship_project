@@ -1,12 +1,17 @@
-import { Mentee, Mentor, MentorshipRequest, SessionBooking } from "../../models/u-index.js";
+import {
+  Mentee,
+  Mentor,
+  MentorshipRequest,
+  SessionBooking,
+} from "../../models/z-index.js";
 import { RequestHandler } from "express";
 import { Op } from "sequelize";
 
 export const mentorshipRequest: RequestHandler = async (req, res) => {
   try {
     if (!req.user || !req.user.id) {
-     res.status(401).json({ message: "Unauthorized: User not found" });
-     return; 
+      res.status(401).json({ message: "Unauthorized: User not found" });
+      return;
     }
 
     const mentorId = Number(req.params.mentorId);
@@ -15,14 +20,14 @@ export const mentorshipRequest: RequestHandler = async (req, res) => {
 
     if (isNaN(mentorId)) {
       res.status(400).json({ message: "Invalid mentor ID" });
-      return; 
+      return;
     }
 
     if (!requestNote || typeof requestNote !== "string") {
       res
         .status(400)
         .json({ message: "Note is required and must be a string" });
-        return; 
+      return;
     }
 
     const isRequestExists = await MentorshipRequest.findOne({
@@ -40,7 +45,7 @@ export const mentorshipRequest: RequestHandler = async (req, res) => {
         message:
           "You already have a pending request with this mentor. Please wait for it to be resolved before requesting a new one.",
       });
-      return; 
+      return;
     }
 
     if (isRequestExists?.status === "accepted") {
@@ -48,7 +53,7 @@ export const mentorshipRequest: RequestHandler = async (req, res) => {
         message:
           "Your mentorship request has already been accepted. You may cancel it to request a new one.",
       });
-      return; 
+      return;
     }
 
     const mentee = await Mentee.findByPk(menteeId);
@@ -62,7 +67,7 @@ export const mentorshipRequest: RequestHandler = async (req, res) => {
 
     if (!mentee || !mentor) {
       res.status(404).json({ message: "Mentee or Mentor not found" });
-      return; 
+      return;
     }
 
     if (!mentor.isAvailable) {
@@ -77,7 +82,7 @@ export const mentorshipRequest: RequestHandler = async (req, res) => {
         message:
           "You already have a session ongoing with a mentor. Please wait for it to end.",
       });
-      return; 
+      return;
     }
 
     const newRequest = await MentorshipRequest.create({
@@ -92,11 +97,10 @@ export const mentorshipRequest: RequestHandler = async (req, res) => {
       message: "Mentorship request sent successfully",
       request: newRequest,
     });
-    return; 
-
+    return;
   } catch (error) {
     console.error("Error in requesting mentorship", error);
     res.status(500).json({ message: "Internal server error" });
-    return; 
+    return;
   }
 };

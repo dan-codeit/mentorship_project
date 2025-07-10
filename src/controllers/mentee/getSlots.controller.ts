@@ -1,10 +1,10 @@
-import { TimeSlot, Mentor } from "../../models/u-index.js";
+import { TimeSlot, Mentor } from "../../models/z-index.js";
 import { RequestHandler } from "express";
 import { formatInTimeZone } from "date-fns-tz";
 
 export const getAvailableSlots: RequestHandler = async (req, res) => {
   try {
-    // Time zone priority: user profile > query param > UTC
+ 
     const menteeTimeZone =
       req.user?.timeZone || req.query.menteeTimeZone?.toString() || "UTC";
 

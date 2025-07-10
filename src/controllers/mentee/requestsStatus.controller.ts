@@ -1,4 +1,4 @@
-import { MentorshipRequest } from "../../models/u-index.js";
+import { MentorshipRequest } from "../../models/z-index.js";
 import { RequestHandler } from "express";
 import { Op } from "sequelize";
 
@@ -10,11 +10,9 @@ export const requestsStatus: RequestHandler = async (
     const menteeId = req.user?.id;
 
     if (!menteeId) {
-       res.status(401).json({ message: "Unauthorized user" });
-       return;
+      res.status(401).json({ message: "Unauthorized user" });
+      return;
     }
-
-
 
     const mentorshipRequest = await MentorshipRequest.findAll({
       where: {
@@ -26,22 +24,20 @@ export const requestsStatus: RequestHandler = async (
     });
 
     if (mentorshipRequest === null || mentorshipRequest.length === 0) {
-      res
-        .status(404)
-        .json({ message: "No mentorship request found" });
-        return;
+      res.status(404).json({ message: "No mentorship request found" });
+      return;
     }
 
     res.status(200).json({
       success: true,
-        message: "Mentorship request fetched successfully",
+      message: "Mentorship request fetched successfully",
       mentorshipRequest,
     });
   } catch (error) {
     console.error("Error in fetching session", error);
     res.status(500).json({
       success: false,
-      message: "Error in fetching session"
+      message: "Error in fetching session",
     });
   }
 };

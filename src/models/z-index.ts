@@ -1,4 +1,4 @@
-import Admin from "./admin.js";
+import Admin from "./admin.model.js";
 import Mentee from "./mentee.js";
 import Mentor from "./mentor.js";
 import SessionBooking from "./sessionBooking.js";
@@ -6,8 +6,7 @@ import SessionFeedback from "./sessionFeedback.js";
 import MentorshipRequest from "./mentorshipRequest.js";
 import TimeSlot from "./timeSlot.js";
 
-
-// Associations 
+// Associations
 Mentor.hasMany(TimeSlot, {
   foreignKey: "mentorId",
   onDelete: "CASCADE",
@@ -79,9 +78,6 @@ MentorshipRequest.belongsTo(Mentee, {
   as: "mentee",
 });
 
-
-
-
 export {
   Admin,
   Mentee,
@@ -91,5 +87,3 @@ export {
   MentorshipRequest,
   TimeSlot,
 };
-
-

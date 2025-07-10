@@ -1,9 +1,8 @@
-
 import { RequestHandler } from "express";
-import { Admin } from "../../models/u-index.js";
-import { checkPassword } from "../../checkPassw/checkPassword.js";
-import { generateJwtPayload} from "../../JWT/generateJwt.js";
-import { signJwt} from "../../JWT/signJwt.js";
+import { Admin } from "../../models/z-index.js";
+import { checkPassword } from "../../validatePassw/checkPassword.js";
+import { generateJwtPayload } from "../../JWT/generateJwt.js";
+import { signJwt } from "../../JWT/signJwt.js";
 
 export const adminLogin: RequestHandler = async (req, res) => {
   try {

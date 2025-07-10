@@ -1,4 +1,4 @@
-import { Mentee, Mentor, Admin } from ".././models/u-index.js";
+import { Mentee, Mentor, Admin } from "../models/z-index.js";
 
 export const isUserEmailUnique = async (email: string): Promise<boolean> => {
   const mentor = await Mentor.findOne({ where: { email } });

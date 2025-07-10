@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import { RequestHandler } from "express";
-import { Mentor, Mentee } from "../models/u-index.js";
+import { Mentor, Mentee } from "../models/z-index.js";
 
 export const forgotPassword: RequestHandler = async (
   req,
@@ -19,7 +19,6 @@ export const forgotPassword: RequestHandler = async (
       return;
     }
 
-   
     let user: Mentor | Mentee | null = await Mentor.findOne({
       where: { email },
     });

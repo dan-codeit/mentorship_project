@@ -1,6 +1,6 @@
 import { RequestHandler } from "express";
-import { Mentor, Mentee } from "../models/u-index.js";
-import { checkPassword } from "../checkPassw/checkPassword.js";
+import { Mentor, Mentee } from "../models/z-index.js";
+import { checkPassword } from "../validatePassw/checkPassword.js";
 import { generateJwtPayload } from "../JWT/generateJwt.js";
 import { signJwt } from "../JWT/signJwt.js";
 
@@ -12,15 +12,13 @@ type AuthUser = {
   lastName: string;
 };
 
-export const usersLogin: RequestHandler = async(req, res)=> {
+export const usersLogin: RequestHandler = async (req, res) => {
   try {
     const { email, password } = req.body;
 
     if (!email || !password) {
-       res
-        .status(400)
-        .json({ error: "Email and password are required." });
-        return; 
+      res.status(400).json({ error: "Email and password are required." });
+      return;
     }
 
     let user: AuthUser | null = (await Mentor.findOne({
@@ -35,25 +33,25 @@ export const usersLogin: RequestHandler = async(req, res)=> {
 
     if (!user) {
       res.status(401).json({ message: "Invalid email or password" });
-      return; 
+      return;
     }
 
     const passwordMatch = await checkPassword(password, user.password);
     if (!passwordMatch) {
-       res.status(401).json({ message: "Invalid email or password." });
-       return; 
+      res.status(401).json({ message: "Invalid email or password." });
+      return;
     }
 
     const payload = generateJwtPayload({
       id: user.id.toString(),
-      role: role as "mentor" | "mentee" ,
+      role: role as "mentor" | "mentee",
       email: user.email,
     });
 
     const token = signJwt(payload);
     if (!token) {
-       res.status(500).json({ error: "Failed to generate token." });
-       return; 
+      res.status(500).json({ error: "Failed to generate token." });
+      return;
     }
 
     res.json({
@@ -71,4 +69,4 @@ export const usersLogin: RequestHandler = async(req, res)=> {
     console.error("Login error:", error);
     res.status(500).json({ message: "Internal server error" });
   }
-}
+};

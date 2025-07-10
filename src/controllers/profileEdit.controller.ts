@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
-import { Mentor, Mentee } from "../models/u-index.js";
+import { Mentor, Mentee } from "../models/z-index.js";
 
 export const editProfile: RequestHandler = async (req, res): Promise<void> => {
   try {
@@ -27,7 +27,7 @@ export const editProfile: RequestHandler = async (req, res): Promise<void> => {
     }
     res.json({ success: true, message: "Profile updated" });
   } catch (error) {
-    console.error("Error in updating user profile", error)
+    console.error("Error in updating user profile", error);
     res.status(500).json({ success: false, message: "Internal server error" });
   }
 };

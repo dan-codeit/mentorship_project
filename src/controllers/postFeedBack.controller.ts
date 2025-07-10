@@ -1,5 +1,9 @@
 import { RequestHandler } from "express";
-import { SessionBooking, SessionFeedback, TimeSlot } from "../models/u-index.js";
+import {
+  SessionBooking,
+  SessionFeedback,
+  TimeSlot,
+} from "../models/z-index.js";
 
 export const postFeedback: RequestHandler = async (req, res) => {
   try {
@@ -37,7 +41,6 @@ export const postFeedback: RequestHandler = async (req, res) => {
     });
 
     if (!feedback) {
-    
       feedback = await SessionFeedback.create({
         sessionBookingId: session.id,
         mentorComment: isMentor ? mentorComment : "",
@@ -46,7 +49,6 @@ export const postFeedback: RequestHandler = async (req, res) => {
         menteeRating: isMentee ? menteeRating : null,
       });
     } else {
-    
       if (isMentor) {
         feedback.mentorComment = mentorComment ?? feedback.mentorComment;
         feedback.mentorRating = mentorRating ?? feedback.mentorRating;

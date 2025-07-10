@@ -1,6 +1,6 @@
 // controllers/timeSlotController.ts
 import { RequestHandler } from "express";
-import { TimeSlot } from "../../models/u-index.js";
+import { TimeSlot } from "../../models/z-index.js";
 import { differenceInMinutes, parse, format, isBefore } from "date-fns";
 
 export const createTimeSlot: RequestHandler = async (req, res) => {
@@ -8,10 +8,8 @@ export const createTimeSlot: RequestHandler = async (req, res) => {
     const mentorId = req.user?.id;
 
     if (!mentorId) {
-     res
-        .status(400)
-        .json({ message: "Mentor ID is missing from request" });
-        return;
+      res.status(400).json({ message: "Mentor ID is missing from request" });
+      return;
     }
 
     const { date, startTime, endTime } = req.body;
@@ -20,7 +18,7 @@ export const createTimeSlot: RequestHandler = async (req, res) => {
       res
         .status(400)
         .json({ message: "date, startTime, and endTime are required" });
-        return;
+      return;
     }
 
     const start = parse(startTime, "HH:mm", new Date());
@@ -28,22 +26,20 @@ export const createTimeSlot: RequestHandler = async (req, res) => {
 
     const duration = differenceInMinutes(end, start);
     if (duration <= 0) {
-     res
-        .status(400)
-        .json({
-          message: "Invalid time range: endTime must be after startTime",
-        });
-        return;
+      res.status(400).json({
+        message: "Invalid time range: endTime must be after startTime",
+      });
+      return;
     }
 
     const today = new Date();
     const dateObj = new Date(date);
-    
+
     if (isBefore(dateObj, today)) {
-       res
+      res
         .status(400)
         .json({ message: "Cannot create a time slot in the past" });
-        return;
+      return;
     }
 
     const day = format(dateObj, "EEEE");
@@ -55,7 +51,7 @@ export const createTimeSlot: RequestHandler = async (req, res) => {
       startTime,
       endTime,
       duration,
-      isBooked: false
+      isBooked: false,
     });
 
     res.status(201).json({

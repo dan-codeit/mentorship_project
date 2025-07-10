@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
-import { Mentor, Mentee } from "../models/u-index.js";
+import { Mentor, Mentee } from "../models/z-index.js";
 
 export const signup: RequestHandler = async (req, res) => {
   try {
@@ -43,7 +43,7 @@ export const signup: RequestHandler = async (req, res) => {
       success: true,
       message: `${role} account created successfully`,
       user: {
-        id:newUser.id,
+        id: newUser.id,
         email: newUser.email,
         role,
         createdAt: newUser.createdAt,

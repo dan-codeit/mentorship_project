@@ -1,9 +1,5 @@
-
 import { Request, Response } from 'express';
-
-
 export default async function getData(req: Request, res: Response){
-res.send("Hello")
+res.send("Loading...")
 }
 
-// localhost:3003/

@@ -1,5 +1,5 @@
 import express from "express";
-import { autoMation } from "./auto/autoComplete.js";
+import { autoMation } from "./scheduler/autoComplete.js";
 import cors from "cors";
 import homeRoute from "./routes/home.route.js";
 import adminRoutes from "./routes/admin_routes/admin.routes.js";

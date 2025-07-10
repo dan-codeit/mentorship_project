@@ -3,16 +3,12 @@ import {
   Mentee,
   TimeSlot,
   MentorshipRequest,
-  Mentor
-} from "../../models/u-index.js";
+  Mentor,
+} from "../../models/z-index.js";
 import { RequestHandler } from "express";
 import { sendSessionReminderEmail } from "../../services/emailService.js";
 
-
-export const bookSession: RequestHandler = async (
-  req,
-  res
-): Promise<void> => {
+export const bookSession: RequestHandler = async (req, res): Promise<void> => {
   try {
     if (!req.user) {
       res.status(401).json({ message: "Unauthenticated user." });
@@ -22,7 +18,7 @@ export const bookSession: RequestHandler = async (
     const menteeId = req.user.id;
     const { mentorId, timeSlotId } = req.params;
 
-      if (!mentorId) {
+    if (!mentorId) {
       res.status(400).json({ message: "Mentor ID is required." });
       return;
     }
@@ -64,13 +60,11 @@ export const bookSession: RequestHandler = async (
       return;
     }
 
-   
-
-      const slot = await TimeSlot.findByPk(timeSlotId);
-      if (!slot || slot.isBooked) {
-         res.status(400).json({ message: "Slot is unavailable" });
-         return;
-      }
+    const slot = await TimeSlot.findByPk(timeSlotId);
+    if (!slot || slot.isBooked) {
+      res.status(400).json({ message: "Slot is unavailable" });
+      return;
+    }
 
     // session booking
     const mentor = await Mentor.findByPk(mentorId);
@@ -99,11 +93,8 @@ export const bookSession: RequestHandler = async (
       message: "Session booked successfully",
       session: newSession,
     });
-
   } catch (error) {
     console.error("Error creating session", error);
     res.status(500).json({ message: "Error creating session" });
   }
 };
-
-
