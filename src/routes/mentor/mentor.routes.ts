@@ -6,7 +6,7 @@ import { createTimeSlot } from "../../controllers/mentor/createTimeSlot.controll
 
 import { upComingRequests } from "../../controllers/mentor/upComingRequest.controller.js";
 import { upcomingSessions } from "../../controllers/mentor/upcomingSessions.controller.js";
-import { turnOffMentorAvailabiltity } from "../../controllers/mentor/turnOffmentorAvailability.controller.js";
+import { turnOffMentorAvailabiltity } from "../../controllers/mentor/OffMentorAvailability.controller.js";
 
 const router = Router();
 
