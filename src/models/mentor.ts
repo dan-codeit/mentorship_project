@@ -70,7 +70,7 @@ Mentor.init(
     },
     isAvailable: {
       type: DataTypes.BOOLEAN,
-      defaultValue: false,
+      defaultValue: true,
     },
     resetTokenHash: {
       type: DataTypes.STRING,

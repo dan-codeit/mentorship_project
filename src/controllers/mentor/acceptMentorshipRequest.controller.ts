@@ -1,4 +1,4 @@
-import { SessionBooking, MentorshipRequest } from "../../models/z-index.js";
+import {MentorshipRequest } from "../../models/z-index.js";
 import { RequestHandler } from "express";
 
 export const acceptMentorshipRequest: RequestHandler = async (req, res) => {

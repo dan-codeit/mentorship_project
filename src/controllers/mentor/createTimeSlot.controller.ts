@@ -1,4 +1,4 @@
-// controllers/timeSlotController.ts
+
 import { RequestHandler } from "express";
 import { TimeSlot } from "../../models/z-index.js";
 import { differenceInMinutes, parse, format, isBefore } from "date-fns";

@@ -1,4 +1,4 @@
-// validators/signupValidator.ts
+
 import { body } from "express-validator";
 
 export const signupValidator = [
